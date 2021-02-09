@@ -40,7 +40,8 @@ function getSingleData(req, res, next){
 
 function createData(req, res, next){
     //TODO: NEED TO SANITIZE THIS!!!
-    req.body.ID = parseInt(req.body.ID);
+    //req.body.ID = parseInt(req.body.ID);
+    console.log(req.body)
     db.none('INSERT into readyfood(name, quantity, date_added)' +
     'values(${name}, ${quantity}, current_date)',
     req.body)
@@ -61,7 +62,7 @@ function createData(req, res, next){
 
 
 //routing
-router.get("/readyfood/", getData);
+router.get("/readyfood", getData);
 router.get("/readyfood/:id", getSingleData);
 router.post("/readyfood", createData);
 
