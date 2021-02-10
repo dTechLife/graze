@@ -12,7 +12,7 @@ function getData(req,res, next) {
         console.log(data)
           res.status(200)
             .json({
-                status : "success",
+              status : "success",
               data: data,
               message: "GET request successful"
           });
@@ -42,8 +42,8 @@ function createData(req, res, next){
     //TODO: NEED TO SANITIZE THIS!!!
     //req.body.ID = parseInt(req.body.ID);
     console.log(req.body)
-    db.none('INSERT into readyfood(name, quantity, date_added)' +
-    'values(${name}, ${quantity}, current_date)',
+    db.none('INSERT into readyfood(name, quantity, date_added, meal_type)' +
+    'values(${name}, ${quantity}, current_date, ${meal_type})',
     req.body)
 
       .then(function() {
@@ -54,6 +54,20 @@ function createData(req, res, next){
             });
       })
       .catch (function (err){
+          return next(err);
+      })
+}
+function deleteData(req,res,next){
+    var ID = parseInt(req.params.id);
+    db.result('delete from readyfood where id = $1', ID)
+      .then(function(result){
+          res.status(200)
+            .json({
+                status:'success',
+                message: `Removed ${result.rowCount} readyfood`
+            });
+      })
+      .catch(function(err){
           return next(err);
       })
 }
