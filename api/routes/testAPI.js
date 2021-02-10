@@ -79,6 +79,7 @@ function deleteData(req,res,next){
 router.get("/readyfood", getData);
 router.get("/readyfood/:id", getSingleData);
 router.post("/readyfood", createData);
+router.delete("/readyfood/:id",deleteData)
 
 
 module.exports = router;
