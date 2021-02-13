@@ -42,8 +42,8 @@ function createData(req, res, next){
     //TODO: NEED TO SANITIZE THIS!!!
     //req.body.ID = parseInt(req.body.ID);
     console.log(req.body)
-    db.none('INSERT into readyfood(name, quantity, date_added, meal_type)' +
-    'values(${name}, ${quantity}, current_date, ${meal_type})',
+    db.none('INSERT into readyfood(name, quantity, unit, date_added, meal_type, location)' +
+    'values(${name}, ${quantity}, ${unit}, current_date, ${meal_type}, ${location})',
     req.body)
 
       .then(function() {
