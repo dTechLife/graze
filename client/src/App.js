@@ -6,7 +6,10 @@ import "./App.css";
 const url = "172.16.1.74"
 
 const size = "1.5em"
+
+
 class App extends Component {
+
   callAPI() {
     fetch(`http://${url}:9000/testAPI/readyfood/`)
       .then((res) => res.json())
@@ -17,6 +20,7 @@ class App extends Component {
         })
       );
   }
+ 
 
   constructor(props) {
     super(props);
@@ -29,14 +33,16 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.callAPI();
+    this.timer = setInterval(() => this.callAPI(), 2000); //call the api every 2 seconds
   }
 
   render() {
     const { isLoaded, readyMeals} = this.state;
 
+
+
     const callAPI = () => {
-      fetch(`http://${url}:9000/testAPI/readyfood/`)
+        fetch(`http://${url}:9000/testAPI/readyfood/`)
         .then((res) => res.json())
         .then((json) =>
           this.setState({
@@ -45,6 +51,7 @@ class App extends Component {
           })
         );
     };
+
 
     const handleChange = (event) => {
       //set the state to the value of the event
@@ -73,6 +80,7 @@ class App extends Component {
       let meal_type = this.state.meal_type;
       let location = this.state.location;
       let unit = this.state.unit;
+      let expires= this.state.expires;
 
 
       console.log(`data: ${data}`);
@@ -82,7 +90,8 @@ class App extends Component {
           quantity: quantity,
           meal_type: meal_type,
           location: location,
-          unit: unit
+          unit: unit,
+          expires: expires
         });
       }
     };
@@ -94,8 +103,9 @@ fetch(`http://${url}:9000/testAPI/readyfood/${event.target.name}`, {
       }).then(function (response) {
         callAPI();
 
-    }
-      )}
+      }
+    )};
+
 
     if (!isLoaded) {
       return <div>Loading...</div>;
@@ -107,7 +117,7 @@ fetch(`http://${url}:9000/testAPI/readyfood/${event.target.name}`, {
             <li key={data.id}>
               <button name={data.id} onClick={handleDelete}>X</button>
               {data.name} | Quantity: {data.quantity} {data.unit} | 
-              added: {data.date_added} | Meal Type:{data.meal_type} | Location: {data.location}
+              Location: {data.location} | Meal Type:{data.meal_type} | added: {data.date_added} | expires: {data.expires}
               </li>
           ))}
         </div>
@@ -130,7 +140,7 @@ fetch(`http://${url}:9000/testAPI/readyfood/${event.target.name}`, {
                   value={this.state.value}
                   onChange={handleChange}
                 />
-              </label>
+              </label><br/>
               <label>
                 unit
                 <input
@@ -159,6 +169,10 @@ fetch(`http://${url}:9000/testAPI/readyfood/${event.target.name}`, {
                   <option value="Counter">Counter</option>
                   <option value="Fridge Freezer">Fridge Freezer</option>
                 </select>
+              </label>
+              <label>
+                expires:
+                <input name="expires" type="date" value={this.state.value} onChange={handleChange}></input>
               </label>
 
             </fieldset>

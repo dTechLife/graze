@@ -1,10 +1,9 @@
 var express = require("express");
 var router = express.Router();
-
-
+var DBPASS = process.env.DBPASS;
 
 var pgp = require('pg-promise')(/*PGP = postgres-promise */)
-var db = pgp(`postgres://destin:urQ1!1%jY9d!@localhost:5432/readyfoods`)
+var db = pgp(`postgres://destin:${DBPASS}@localhost:5432/readyfoods`)
 //destin:urQ1!1%jY9d!
 //TODO: Change password and use .env to set instead of hard encoding it.
 
