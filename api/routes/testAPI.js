@@ -1,9 +1,13 @@
 var express = require("express");
 var router = express.Router();
 
+
+
 var pgp = require('pg-promise')(/*PGP = postgres-promise */)
 var db = pgp(`postgres://destin:urQ1!1%jY9d!@localhost:5432/readyfoods`)
 //destin:urQ1!1%jY9d!
+//TODO: Change password and use .env to set instead of hard encoding it.
+
 
 //db 
 function getData(req,res, next) {    
@@ -42,8 +46,8 @@ function createData(req, res, next){
     //TODO: NEED TO SANITIZE THIS!!!
     //req.body.ID = parseInt(req.body.ID);
     console.log(req.body)
-    db.none('INSERT into readyfood(name, quantity, unit, date_added, meal_type, location)' +
-    'values(${name}, ${quantity}, ${unit}, current_date, ${meal_type}, ${location})',
+    db.none('INSERT into readyfood(name, quantity, unit, date_added, meal_type, location, expires)' +
+    'values(${name}, ${quantity}, ${unit}, current_date, ${meal_type}, ${location}, ${expires})',
     req.body)
 
       .then(function() {
