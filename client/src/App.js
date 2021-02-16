@@ -114,11 +114,11 @@ fetch(`http://${url}:9000/testAPI/readyfood/${event.target.name}`, {
       <div className="App" style={{fontSize:size}}>
         <div>
           {readyMeals.data.map((data) => (
-            <li key={data.id}>
+            <ul key={data.id}>
               <button name={data.id} onClick={handleDelete}>X</button>
               {data.name} | Quantity: {data.quantity} {data.unit} | 
-              Location: {data.location} | Meal Type:{data.meal_type} | added: {data.date_added} | expires: {data.expires}
-              </li>
+              Location: {data.location}<br/>  Meal Type:{data.meal_type} | added: { new Date(data.date_added).toDateString()} | expires: { new Date(data.expires).toDateString()}
+              </ul>
           ))}
         </div>
         <div>
@@ -160,7 +160,7 @@ fetch(`http://${url}:9000/testAPI/readyfood/${event.target.name}`, {
                 </select>
               </label>
 
-              <label>
+              <label><br/>
                 location:
                 <select  style={{fontSize:"1em"}}onChange={handleChange} name="location">
                   <option value="N/A">Select one...</option>
@@ -170,7 +170,7 @@ fetch(`http://${url}:9000/testAPI/readyfood/${event.target.name}`, {
                   <option value="Fridge Freezer">Fridge Freezer</option>
                 </select>
               </label>
-              <label>
+              <label><br/>
                 expires:
                 <input name="expires" type="date" value={this.state.value} onChange={handleChange}></input>
               </label>

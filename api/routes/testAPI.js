@@ -12,7 +12,7 @@ var db = pgp(`postgres://destin:${DBPASS}@localhost:5432/readyfoods`)
 function getData(req,res, next) {    
     db.any('SELECT * FROM readyfood ')
     .then( function (data){
-        console.log(data)
+        //console.log(data)
           res.status(200)
             .json({
               status : "success",
