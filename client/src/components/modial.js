@@ -24,35 +24,34 @@ class Modial extends React.Component {
     };
 
     const handleSubmit = (event) => {
-        event.preventDefault();
+      event.preventDefault();
       let name = event.target.name.value;
-      //let quantity = event.target.quantity.value;
+      let quantity = event.target.quantity.value;
       //let meal_type = event.target.meal_type.value;
       //let location = event.target.location.value;
-      //let unit = event.target.unit.value;
-      //let expires = event.target.expires.value;
+      let unit = event.target.unit.value;
+      let expires = event.target.expires.value;
       let id = event.target.id.value;
-
 
       updatePost({
         name: name,
-        //quantity: quantity,
+        quantity: quantity,
         //meal_type: meal_type,
         //location: location,
-        //unit: unit,
-        //expires: expires,
+        unit: unit,
+        expires: expires,
         id: id,
       });
     };
 
     const handleChange = (event) => {
-        event.preventDefault();
+      event.preventDefault();
 
       this.setState({ [event.target.name]: event.target.value });
     };
 
     let readyMeals = this.props.readyMeals.data;
-console.log(readyMeals)
+    console.log(readyMeals);
     return (
       <div id="readyMealsForm">
         {readyMeals.map((meal) => {
@@ -61,20 +60,47 @@ console.log(readyMeals)
             return (
               <div>
                 <form onSubmit={handleSubmit}>
-                  <input
-                    name="name"
-                    onChange={handleChange}
-                    value={this.state.value}
-                    defaultValue={meal.name}
-                  ></input>
-                  <input
-                    name="id"
-                    onChange={handleChange}
-                    defaultValue={meal.id}
-                  ></input>
-                  |{meal.id} {meal.date_added}
+                  <label>
+                    Name:
+                    <input
+                      name="name"
+                      onChange={handleChange}
+                      value={this.state.value}
+                      defaultValue={meal.name}
+                    ></input>
+                  </label>
+                  <br />
+                  <label>
+                    Quantity:
+                    <input
+                      name="quantity"
+                      type="number"
+                      onChange={handleChange}
+                      defaultValue={meal.quantity}
+                    ></input>
+                  </label>
+                  <label>
+                    <input
+                      name="unit"
+                      onChange={handleChange}
+                      value={this.state.value}
+                      defaultValue={meal.unit}
+                    ></input>
+                  </label>
+                  <br />
+                  <label>
+                    Expires:
+                    <input
+                      name="expires"
+                      type="date"
+                      value={this.state.value}
+                      defaultValue={meal.expires}
+                    ></input>
+                  </label>
+                  <br />
+                  <br />
                   {console.log(this.state)}
-                  <button type="submit"></button>
+                  <button type="submit">Submit</button>
                 </form>
               </div>
             );

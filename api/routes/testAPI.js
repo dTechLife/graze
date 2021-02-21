@@ -84,8 +84,10 @@ function deleteData(req,res,next){
 
 function updateData(req,res,next){
     var id = parseInt(req.params.id);
-    db.none('update readyfood set name= $1, quantity= $2, unit=$3, date_added=$4, meal_type=$5, location=$6, expires=$7 where id=$8',
-    [req.body.name, req.body.quantity, req.body.unit, req.body.data_added, req.body.meal_type, req.body.location, req.body.expires, id])
+    db.none('update readyfood set(name, quantity, unit, meal_type, location, expires)' +
+    'values(${name}, ${quantity}, ${unit}, ${meal_type}, ${location}, ${expires})',
+    //db.none('update readyfood set name= $1, quantity= $2, unit=$3, meal_type=$4, location=$5, expires=$6 where id=$7',
+    [req.body.name, req.body.quantity, req.body.unit, req.body.meal_type, req.body.location, req.body.expires, id])
       .then(function(){
           res.status(200)
             .json({
