@@ -3,7 +3,7 @@ var router = express.Router();
 var DBPASS = process.env.DBPASS;
 
 var pgp = require('pg-promise')(/*PGP = postgres-promise */)
-const URL = "localhost"
+const URL = "172.16.1.174"
 const DB_PASSWORD = "postgresql"
 
 
