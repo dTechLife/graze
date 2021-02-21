@@ -3,7 +3,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import Modial from "./components/modial";
 
-const url = "127.0.0.1";
+const url = "localhost";
 
 const size = "1.5em";
 
