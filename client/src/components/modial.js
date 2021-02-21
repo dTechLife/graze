@@ -1,6 +1,6 @@
 import React, { Component, useState, setState } from "react";
 
-const url = "172.16.1.74";
+const url = "127.0.0.1";
 
 class Modial extends React.Component {
   constructor(props) {
