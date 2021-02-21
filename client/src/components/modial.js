@@ -52,7 +52,7 @@ class Modial extends React.Component {
     };
 
     let readyMeals = this.props.readyMeals.data;
-
+console.log(readyMeals)
     return (
       <div id="readyMealsForm">
         {readyMeals.map((meal) => {
