@@ -3,8 +3,8 @@ import logo from "./logo.svg";
 import "./App.css";
 import Modial from "./components/modial";
 
-//const url = "172.16.1.174";
-const url = "localhost";
+const url = "172.16.1.174";
+//const url = "localhost";
 
 const size = "1.5em";
 
