@@ -3,7 +3,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import Modial from "./components/modial";
 
-const url = "graze-postgres";
+const url = "172.16.1.174";
 
 const size = "1.5em";
 
