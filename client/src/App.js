@@ -3,7 +3,8 @@ import logo from "./logo.svg";
 import "./App.css";
 import Modial from "./components/modial";
 
-const url = "172.16.1.174";
+//const url = "172.16.1.174";
+const url = "localhost";
 
 const size = "1.5em";
 
@@ -33,7 +34,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.timer = setInterval(() => this.callAPI(), 2000); //call the api every 2 seconds
+    this.timer = setInterval(() => this.callAPI(), 3000); //call the api every 2 seconds
   }
 
   render() {
@@ -78,6 +79,7 @@ class App extends Component {
       let meal_type = this.state.meal_type;
       let location = this.state.location;
       let unit = this.state.unit;
+      let date_added = new Date().toDateString()
       let expires = this.state.expires;
 
       console.log(`data: ${data}`);
@@ -88,6 +90,7 @@ class App extends Component {
           meal_type: meal_type,
           location: location,
           unit: unit,
+          date_added: date_added,
           expires: expires,
         });
       }
@@ -164,8 +167,8 @@ class App extends Component {
               <br />
               Location: {data.location}
               <br />
-              added: {new Date(data.date_added).toDateString()} <br />
-              expires: {new Date(data.expires).toDateString()}
+              added: {data.date_added} <br />
+              expires: {data.expires}
             </ul>
           ))}
         </div>
@@ -223,7 +226,7 @@ class App extends Component {
                   onChange={handleChange}
                   name="location"
                 >
-                  <option value="N/A">Select one...</option>
+                  <option value="">Select one...</option>
                   <option value="Fridge">Fridge</option>
                   <option value="Deep Freeze">Deep Freeze</option>
                   <option value="Counter">Counter</option>

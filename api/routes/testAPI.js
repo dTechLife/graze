@@ -3,13 +3,14 @@ var router = express.Router();
 var DBPASS = process.env.DBPASS;
 
 var pgp = require('pg-promise')(/*PGP = postgres-promise */)
-const URL = "graze-postgres"
+//const URL = "graze-postgres"
 const DB_PASSWORD = "postgresql"
+//const DB_PASSWORD=""
+//var URL = ""
 
+//const db = pgp(`postgres://graze:${DB_PASSWORD}@${URL}:5432/graze`)
 
-const db = pgp(`postgres://graze:${DB_PASSWORD}@${URL}:5432/graze`)
-
-//var db = pgp(`postgres://destin:urQ1!1%jY9d!@${URL}:5432/readyfoods`)
+var db = pgp(`postgres://destin:urQ1!1%jY9d!@localhost:5432/readyfoods`)
 //destin:urQ1!1%jY9d!
 //TODO: Change password and use .env to set instead of hard encoding it.
 
@@ -52,7 +53,7 @@ function createData(req, res, next){
     //req.body.ID = parseInt(req.body.ID);
     console.log(req.body)
     db.none('INSERT into readyfood(name, quantity, unit, date_added, meal_type, location, expires)' +
-    'values(${name}, ${quantity}, ${unit}, current_date, ${meal_type}, ${location}, ${expires})',
+    'values(${name}, ${quantity}, ${unit}, ${date_added}, ${meal_type}, ${location}, ${expires})',
     req.body)
 
       .then(function() {
@@ -83,10 +84,13 @@ function deleteData(req,res,next){
 }
 
 function updateData(req,res,next){
-    var id = parseInt(req.params.id);
-    db.none('update readyfood set(name, quantity, unit, meal_type, location, expires where id)' +
-    'values(${name}, ${quantity}, ${unit}, ${meal_type}, ${location}, ${expires} ${id})', 
-    req.body)
+    var id = parseInt(req.body.id);
+    console.log(req.body.expires)
+    db.none('update readyfood set name=$1, quantity=$2, unit=$3, expires=$4 where id=$5',
+    [req.body.name, parseInt(req.body.quantity), req.body.unit, req.body.expires, id])
+    //db.none('update readyfood set(name, quantity, unit, meal_type, location, expires)' +
+    //'values(${name}, ${quantity}, ${unit}, ${meal_type}, ${location}, ${expires} ) where ID=${id}', 
+    //req.body)
       .then(function(){
           res.status(200)
             .json({

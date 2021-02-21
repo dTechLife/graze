@@ -1,7 +1,7 @@
 import React, { Component, useState, setState } from "react";
 
-const url = "172.16.1.174";
-
+//const url = "172.16.1.174";
+const url ="localhost"
 class Modial extends React.Component {
   constructor(props) {
     super(props);
@@ -30,8 +30,8 @@ class Modial extends React.Component {
       //let meal_type = event.target.meal_type.value;
       //let location = event.target.location.value;
       let unit = event.target.unit.value;
-      let expires = event.target.expires.value;
-      let id = event.target.id.value;
+      let expires = event.target.expires.value.toString();
+      let id = this.props.id;
 
       updatePost({
         name: name,
