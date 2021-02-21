@@ -30,7 +30,7 @@ class Modial extends React.Component {
       //let meal_type = event.target.meal_type.value;
       //let location = event.target.location.value;
       let unit = event.target.unit.value;
-      let expires = event.target.expires.value.toString();
+      let expires = new Date(event.target.expires.value).toISOString().slice(0,10);
       let id = this.props.id;
 
       updatePost({

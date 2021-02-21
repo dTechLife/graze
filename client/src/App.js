@@ -79,8 +79,8 @@ class App extends Component {
       let meal_type = this.state.meal_type;
       let location = this.state.location;
       let unit = this.state.unit;
-      let date_added = new Date().toDateString()
-      let expires = this.state.expires;
+      let date_added = new Date().toISOString().slice(0,10);
+      let expires = new Date(this.state.expires).toISOString().slice(0,10);
 
       console.log(`data: ${data}`);
       if (data) {
@@ -123,6 +123,32 @@ class App extends Component {
       this.setState({ display: "none" });
     };
 
+    class ExpiredComponent extends Component {
+      constructor(props){
+        super(props);
+        this.state={
+          show:true
+        }
+      }
+      render(){
+      let today = new Date().toISOString().slice(0,10);
+      let expires = this.props.expires;
+      console.log(`${expires} ${today}`)
+
+
+        if (expires === today){
+           return <p>Expires today!</p>
+        }
+        else if(expires <= today){
+          return (<p>EXPIRED</p>)
+        }
+        else{
+          return (<p>Still good!</p>)
+        }
+      }
+      
+    }
+
     if (!isLoaded) {
       return <div>Loading...</div>;
     }
@@ -137,7 +163,7 @@ class App extends Component {
 
             <button onClick={closeModial}>X</button>
             <u>
-              <p>Edit Modial:</p>
+              
             </u>
           </div>
         </div>
@@ -145,7 +171,7 @@ class App extends Component {
         <div id="time">
           <u>
             <p style={{ textAlign: "right" }}>
-              Today: {new Date().toDateString()}
+              Today: { new Date().toDateString()}
             </p>
           </u>
         </div>
@@ -154,6 +180,8 @@ class App extends Component {
           {readyMeals.data.map((data) => (
             <ul key={data.id} id="listItem">
               {data.name}
+              <ExpiredComponent expires={data.expires}/>
+
               <button name={data.id} onClick={openModial}>
                 {" "}
                 Edit
