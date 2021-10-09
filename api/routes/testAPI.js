@@ -5,15 +5,13 @@ var DBPASS = process.env.DBPASS;
 var pgp = require('pg-promise')(/*PGP = postgres-promise */)
 const URL = "graze-postgres"
 const DB_PASSWORD = "postgresql"
-//const DB_PASSWORD=""
-//var URL = ""
+
 
 const db = pgp(`postgres://graze:${DB_PASSWORD}@${URL}:5432/graze`)
 
 //var db = pgp(`postgres://destin:urQ1!1%jY9d!@localhost:5432/readyfoods`)
 //destin:urQ1!1%jY9d!
 //TODO: Change password and use .env to set instead of hard encoding it.
-
 
 //db 
 function getData(req,res, next) {    

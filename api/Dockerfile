@@ -4,6 +4,6 @@ COPY package.json ./
 RUN npm install
 COPY . .
 
-CMD [ "npm", "start" ]
+RUN npm start 
 
 EXPOSE 9000
