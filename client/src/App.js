@@ -191,7 +191,7 @@ class App extends Component {
               </button>
               <br />
               {data.meal_type} <br />
-              Quantity: {data.quantity} {data.unit}
+              Quantity: {data.quantity} - {data.unit}
               <br />
               Location: {data.location}
               <br />
