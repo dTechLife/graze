@@ -5,7 +5,7 @@ import Modial from "./components/modial";
 
 //const url = "172.16.1.174";
 const url = "localhost";
-
+const port = 9001;
 const size = "1.5em";
 
 class App extends Component {
@@ -41,7 +41,7 @@ class App extends Component {
     const { isLoaded, readyMeals, modialActive } = this.state;
 
     const callAPI = () => {
-      fetch(`http://${url}:9000/testAPI/readyfood/`)
+      fetch(`http://${url}:${port}/testAPI/readyfood/`)
         .then((res) => res.json())
         .then((json) =>
           this.setState({
@@ -59,7 +59,7 @@ class App extends Component {
     function createPost(opts) {
       var x = JSON.stringify(opts);
       console.log(x);
-      fetch(`http://${url}:9000/testAPI/readyfood`, {
+      fetch(`http://${url}:${port}/testAPI/readyfood`, {
         method: "POST",
         headers: { "Content-type": "application/json" },
         body: JSON.stringify(opts),
@@ -98,7 +98,7 @@ class App extends Component {
 
     const handleDelete = (event) => {
       console.log(event.target.name);
-      fetch(`http://${url}:9000/testAPI/readyfood/${event.target.name}`, {
+      fetch(`http://${url}:${port}/testAPI/readyfood/${event.target.name}`, {
         method: "DELETE",
       }).then(function (response) {
         callAPI();
