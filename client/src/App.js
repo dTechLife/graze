@@ -10,7 +10,7 @@ const size = "1.5em";
 
 class App extends Component {
   callAPI() {
-    fetch(`http://${url}:9001/testAPI/readyfood/`)
+    fetch(`http://${url}:${port}/testAPI/readyfood/`)
       .then((res) => res.json())
       .then((json) =>
         this.setState({
