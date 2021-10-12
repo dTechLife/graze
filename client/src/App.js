@@ -10,7 +10,7 @@ const size = "1.5em";
 
 class App extends Component {
   callAPI() {
-    fetch(`http://${url}:9000/testAPI/readyfood/`)
+    fetch(`http://${url}:9001/testAPI/readyfood/`)
       .then((res) => res.json())
       .then((json) =>
         this.setState({
@@ -79,8 +79,8 @@ class App extends Component {
       let meal_type = this.state.meal_type;
       let location = this.state.location;
       let unit = this.state.unit;
-      let date_added = new Date().toISOString().slice(0,10);
-      let expires = new Date(this.state.expires).toISOString().slice(0,10);
+      let date_added = new Date().toISOString().slice(0, 10);
+      let expires = new Date(this.state.expires).toISOString().slice(0, 10);
 
       console.log(`data: ${data}`);
       if (data) {
@@ -124,29 +124,25 @@ class App extends Component {
     };
 
     class ExpiredComponent extends Component {
-      constructor(props){
+      constructor(props) {
         super(props);
-        this.state={
-          show:true
+        this.state = {
+          show: true,
+        };
+      }
+      render() {
+        let today = new Date().toISOString().slice(0, 10);
+        let expires = this.props.expires;
+        console.log(`${expires} ${today}`);
+
+        if (expires === today) {
+          return <p>Expires today!</p>;
+        } else if (expires <= today) {
+          return <p>EXPIRED</p>;
+        } else {
+          return <p>Still good!</p>;
         }
       }
-      render(){
-      let today = new Date().toISOString().slice(0,10);
-      let expires = this.props.expires;
-      console.log(`${expires} ${today}`)
-
-
-        if (expires === today){
-           return <p>Expires today!</p>
-        }
-        else if(expires <= today){
-          return (<p>EXPIRED</p>)
-        }
-        else{
-          return (<p>Still good!</p>)
-        }
-      }
-      
     }
 
     if (!isLoaded) {
@@ -162,16 +158,14 @@ class App extends Component {
             <Modial readyMeals={readyMeals} id={this.state.modialID} />
 
             <button onClick={closeModial}>X</button>
-            <u>
-              
-            </u>
+            <u></u>
           </div>
         </div>
 
         <div id="time">
           <u>
             <p style={{ textAlign: "right" }}>
-              Today: { new Date().toDateString()}
+              Today: {new Date().toDateString()}
             </p>
           </u>
         </div>
@@ -180,8 +174,7 @@ class App extends Component {
           {readyMeals.data.map((data) => (
             <ul key={data.id} id="listItem">
               {data.name}
-              <ExpiredComponent expires={data.expires}/>
-
+              <ExpiredComponent expires={data.expires} />
               <button name={data.id} onClick={openModial}>
                 {" "}
                 Edit
