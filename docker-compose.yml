@@ -7,7 +7,6 @@ services:
     volumes:
       - graze-data:/var/lib/postgresql/data
       - ./init:/docker-entrypoint-initdb.d/
-    driver: local
     ports:
       - 5432:5432
     environment:
@@ -34,5 +33,4 @@ services:
       - graze-api
 
 volumes:
-  driver: local
   graze-data:
