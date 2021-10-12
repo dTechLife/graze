@@ -4,7 +4,7 @@ import "./App.css";
 import Modial from "./components/modial";
 
 //const url = "172.16.1.174";
-const url = "localhost";
+const url = "graze-postgres";
 const port = 9001;
 const size = "1.5em";
 
